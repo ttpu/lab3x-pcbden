@@ -1,0 +1,32 @@
+How to connect to orange pi:
+
+ssh -p 13245 username@iotserver.uz
+
+How to run assembly code and print the result:
+1.Create assembly.s file, you can create assembly.s file using the following instruction:
+ 
+micro assembly.s
+
+Shortcuts to use in micro editor:
+ 
+CTRL + S = SAVE
+CTRL + Q = QUIT
+
+2.Write your assembly code and save it . Below you can see structure of assembly code:
+
+.section .data
+array: .dword 2, 5, 3, 2, 8, 3, 2, 8, 5, 1
+array_size: .dword 10
+result: .dword 0  
+
+.section .text
+.global assembly
+assembly:
+   // Your code here
+   // SAVE YOUR RESULT IN X0 or W0 REGISTER, thus it returns your value to function caller
+RET
+
+3. Following are the instructions to Call assembly function inside a C file and run your assembly:
+
+gcc -o program Call_assembly.c assembly.s
+./program
